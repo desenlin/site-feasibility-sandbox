@@ -4,7 +4,7 @@
 <p align="center"><strong>Created by <a href="https://desenlin.com/">Desen Lin</a>, California State University, Fullerton</strong></p>
 
 <p align="center">
-  <a href="https://desenlin.github.io/site-feasibility-sandbox/"><strong>Launch the sandbox</strong></a>
+  <a href="https://desenlin.com/site-feasibility-sandbox/"><strong>Launch the sandbox</strong></a>
 </p>
 
 ## Purpose
@@ -26,7 +26,7 @@ Each key concept includes a short definition that appears by hovering over or fo
 
 ## Using the sandbox
 
-1. Open the [published tool](https://desenlin.github.io/site-feasibility-sandbox/).
+1. Open the [published tool](https://desenlin.com/site-feasibility-sandbox/).
 2. Start with the guided Fullerton learning site or draw a replacement parcel.
 3. Add, reshape, move, rotate, or delete building footprints.
 4. Change the setback, maximum FAR, maximum lot coverage, and story assumptions.
