@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a reproducible calculation, map, display, or accessibility problem.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Thank you for helping improve this instructional tool. Do not include student records, credentials, or private parcel information."
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open the tool\n2. Change...\n3. Observe..."
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+      placeholder: "Example: Edge 152 on Windows 11"
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Screenshots are useful when they contain no private information.

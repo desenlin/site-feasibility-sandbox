@@ -1,0 +1,29 @@
+name: Instructional improvement
+description: Propose a focused improvement to the learning experience.
+title: "[Idea]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: concept
+    attributes:
+      label: Learning objective
+      description: What concept or student difficulty would this change address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the smallest useful change.
+    validations:
+      required: true
+  - type: dropdown
+    id: services
+    attributes:
+      label: Does the proposal require a new external service?
+      options:
+        - "No"
+        - "Yes — free and keyless"
+        - "Yes — account, key, or billing required"
+    validations:
+      required: true

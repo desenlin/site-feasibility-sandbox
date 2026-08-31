@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An instructional workspace for exploring site geometry, FAR, lot coverage, setbacks, and development capacity.">
+  <meta name="author" content="Desen Lin">
+  <title>Site Feasibility Sandbox</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@geoman-io/leaflet-geoman-free@2.18.0/dist/leaflet-geoman.css">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@geoman-io/leaflet-geoman-free@2.18.0/dist/leaflet-geoman.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@turf/turf@7.2.0/turf.min.js"></script>
+  <script defer src="src/config.js"></script>
+  <script defer src="src/geometry.js"></script>
+  <script defer src="src/metrics.js"></script>
+  <script defer src="src/app.js"></script>
+</head>
+<body>
+  <main class="planner-shell">
+    <header class="planner-header">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">SF</div>
+        <div>
+          <div class="brand-title">Site Feasibility Sandbox</div>
+          <div class="brand-subtitle">Geometry literacy · Development capacity</div>
+          <div class="brand-byline">Created by Desen Lin, California State University, Fullerton</div>
+        </div>
+      </div>
+      <div class="header-status" aria-live="polite"><span class="status-dot"></span><span id="mapStatus">Preparing workspace</span></div>
+    </header>
+
+    <div class="planner-workspace">
+      <aside class="control-panel" aria-label="Site controls">
+        <section class="panel-section">
+          <p class="panel-kicker">Guided case</p>
+          <h1 class="panel-title">Fullerton Learning Site</h1>
+          <p class="panel-copy">A hypothetical 200 × 300 ft parcel near CSUF. Edit the geometry or replace it with your own boundary.</p>
+        </section>
+
+        <section class="panel-section">
+          <p class="panel-kicker">Geometry tools</p>
+          <div class="tool-grid">
+            <button class="tool-button primary wide" id="addBuilding" type="button">＋ Add building footprint</button>
+            <button class="tool-button wide" id="drawSite" type="button">◇ Draw a new site</button>
+            <button class="tool-button" id="editVertices" type="button">⌁ Vertices</button>
+            <button class="tool-button" id="moveShapes" type="button">✥ Move</button>
+            <button class="tool-button" id="rotateShapes" type="button">↻ Rotate</button>
+            <button class="tool-button" id="deleteShapes" type="button">⌫ Delete</button>
+            <button class="tool-button ghost wide active" id="finishEditing" type="button">⌁ Finish editing</button>
+          </div>
+          <p class="tool-instruction" id="toolInstruction" aria-live="polite">Choose a tool, then work directly on the map.</p>
+        </section>
+
+        <section class="panel-section">
+          <p class="panel-kicker">Development assumptions</p>
+          <div class="field">
+            <div class="field-line">
+              <div class="field-label"><label for="setback">Uniform setback</label><button class="help-trigger" type="button" data-definition="The minimum distance between the parcel boundary and the buildable envelope. This simplified model applies the same setback on every side." aria-label="Definition of uniform setback">?</button></div>
+              <span class="field-value" id="setbackValue">20 ft</span>
+            </div>
+            <input id="setback" type="range" min="0" max="60" step="1" value="20">
+          </div>
+          <div class="field">
+            <div class="field-line">
+              <div class="field-label"><label for="maxFar">Maximum FAR</label><button class="help-trigger" type="button" data-definition="The selected upper limit on floor area ratio: total gross floor area divided by site area." aria-label="Definition of maximum FAR">?</button></div>
+              <span class="field-value" id="maxFarValue">2.0</span>
+            </div>
+            <input id="maxFar" type="range" min="0.2" max="6" step="0.1" value="2">
+          </div>
+          <div class="field field-grid">
+            <div>
+              <div class="field-label"><label for="coverage">Max coverage</label><button class="help-trigger" type="button" data-definition="The greatest share of the site that may be occupied by building footprints at ground level." aria-label="Definition of maximum coverage">?</button></div>
+              <div class="unit-input"><input id="coverage" type="number" min="1" max="100" value="60"><span>%</span></div>
+            </div>
+            <div>
+              <div class="field-label"><label for="stories">Stories</label><button class="help-trigger" type="button" data-definition="The assumed number of floors. The tool estimates gross floor area as footprint area multiplied by stories." aria-label="Definition of stories">?</button></div>
+              <input id="stories" type="number" min="1" max="30" value="3">
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-section">
+          <button class="tool-button wide" id="resetCase" type="button">↶ Reset guided case</button>
+        </section>
+      </aside>
+
+      <section class="map-stage" aria-label="Interactive site plan">
+        <div id="map" class="map-canvas" role="application" aria-label="Map for drawing a site and building footprints"></div>
+        <div class="map-key" aria-label="Map legend">
+          <span class="key-item"><span class="key-swatch key-site"></span> Site</span>
+          <span class="key-item"><span class="key-swatch key-envelope"></span> Buildable</span>
+          <span class="key-item"><span class="key-swatch key-building"></span> Building</span>
+        </div>
+        <div class="map-watermark">Parcel location and assumptions are hypothetical and provided only for instruction. Measurements are preliminary, not survey-grade.</div>
+        <noscript><div class="map-error">JavaScript is required to use this interactive planning tool.</div></noscript>
+      </section>
+
+      <aside class="metrics-panel" aria-label="Capacity results">
+        <div class="metrics-heading"><p class="panel-kicker">Live results</p><h2 class="panel-title">Development capacity</h2></div>
+        <div class="metrics-grid">
+          <article class="metric-card featured">
+            <div><div class="metric-label help-label"><span>Current FAR</span><button class="help-trigger inverse" type="button" data-definition="The current gross floor area divided by site area. A FAR of 1.00 means floor area equals site area." aria-label="Definition of current FAR">?</button></div><div class="metric-value" id="farMetric">0.50</div></div>
+            <div class="metric-note">Maximum<br><span id="farMaximum">2.0</span></div>
+          </article>
+          <article class="metric-card"><div class="metric-label help-label"><span>Site area</span><button class="help-trigger" type="button" data-definition="The land area enclosed by the site boundary drawn on the map." aria-label="Definition of site area">?</button></div><div class="metric-value" id="siteAreaMetric">—</div><div class="metric-note" id="siteAreaNote">sq ft</div></article>
+          <article class="metric-card"><div class="metric-label help-label"><span>Buildable area</span><button class="help-trigger" type="button" data-definition="The portion of the site remaining after applying the uniform setback. It is an instructional estimate, not a zoning determination." aria-label="Definition of buildable area">?</button></div><div class="metric-value" id="buildableMetric">—</div><div class="metric-note">sq ft inside setbacks</div></article>
+          <article class="metric-card"><div class="metric-label help-label"><span>Footprint</span><button class="help-trigger" type="button" data-definition="The combined ground-level area of all building shapes drawn on the site." aria-label="Definition of building footprint">?</button></div><div class="metric-value" id="footprintMetric">—</div><div class="metric-note" id="footprintNote">sq ft</div></article>
+          <article class="metric-card"><div class="metric-label help-label"><span>Gross floor area</span><button class="help-trigger" type="button" data-definition="Estimated total floor area across all stories: building footprint multiplied by the assumed number of stories." aria-label="Definition of gross floor area">?</button></div><div class="metric-value" id="gfaMetric">—</div><div class="metric-note" id="gfaNote">sq ft</div></article>
+          <article class="metric-card"><div class="metric-label help-label"><span>Lot coverage</span><button class="help-trigger" type="button" data-definition="The percentage of site area occupied by building footprints: footprint divided by site area." aria-label="Definition of lot coverage">?</button></div><div class="metric-value" id="coverageMetric">—</div><div class="metric-note" id="coverageNote">Maximum 60%</div></article>
+          <article class="metric-card"><div class="metric-label help-label"><span>Open site area</span><button class="help-trigger" type="button" data-definition="The portion of the site not covered by building footprints. It may include setbacks, landscaping, parking, or other open space." aria-label="Definition of open site area">?</button></div><div class="metric-value" id="openAreaMetric">—</div><div class="metric-note">sq ft outside footprints</div></article>
+          <article class="metric-card"><div class="metric-label help-label"><span>FAR capacity</span><button class="help-trigger" type="button" data-definition="The maximum gross floor area under the selected FAR assumption: site area multiplied by maximum FAR." aria-label="Definition of FAR capacity">?</button></div><div class="metric-value" id="farCapacityMetric">—</div><div class="metric-note">maximum GFA by FAR</div></article>
+          <article class="metric-card"><div class="metric-label help-label"><span>Unused capacity</span><button class="help-trigger" type="button" data-definition="The remaining gross floor area available before reaching the selected FAR limit, never shown below zero." aria-label="Definition of unused capacity">?</button></div><div class="metric-value" id="unusedMetric">—</div><div class="metric-note">sq ft below FAR limit</div></article>
+        </div>
+        <div class="constraint-box" id="constraintBox" role="status">
+          <div class="constraint-title help-label"><span id="constraintHeading">Likely binding constraint</span><button class="help-trigger" id="constraintHelp" type="button" data-definition="The assumption that currently produces the lower development capacity when comparing the FAR limit with coverage-and-story capacity." aria-label="Definition of likely binding constraint">?</button></div>
+          <p class="constraint-value" id="constraintValue">—</p>
+          <p class="constraint-copy" id="constraintCopy">—</p>
+        </div>
+        <div class="formula-block"><p class="panel-kicker">Calculation logic</p><div class="formula">FAR = gross floor area ÷ site area</div><div class="formula">Lot coverage = footprint ÷ site area</div><div class="formula">GFA = footprint × stories</div></div>
+      </aside>
+    </div>
+
+    <footer class="planner-footer">Educational estimates only. This tool is not a survey, zoning determination, architectural plan, entitlement analysis, or investment recommendation. Created by Desen Lin for real estate instruction. <a href="https://github.com/desenlin/site-feasibility-sandbox">View source and documentation</a>.</footer>
+  </main>
+  <div id="conceptTooltip" class="concept-tooltip" role="tooltip" hidden></div>
+</body>
+</html>
