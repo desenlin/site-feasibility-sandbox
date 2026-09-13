@@ -115,9 +115,7 @@ input[type="range"] { width: 100%; accent-color: var(--navy); cursor: pointer; }
 .planner-footer a { color: white; text-decoration-color: rgba(245,130,32,.8); text-underline-offset: 3px; }
 .planner-footer a:hover { color: var(--orange); }
 .footer-kicker { margin-bottom: 7px !important; color: var(--orange); font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
-.footer-name { margin-bottom: 7px !important; font-size: 18px; font-weight: 800; }
-.footer-name a { display: inline-block; padding: 1px 5px 2px; background: var(--orange); color: var(--navy); text-decoration: none; }
-.footer-name a:hover { background: white; color: var(--navy); }
+.footer-attribution { margin-bottom: 7px !important; }
 .footer-links { display: flex; align-items: flex-start; flex-direction: column; gap: 5px; }
 .footer-links .footer-kicker { margin-bottom: 2px !important; }
 .footer-bottom { width: min(1180px, 100%); margin: 22px auto 0; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.2); color: #aebed1; font-size: 11px; }
