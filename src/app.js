@@ -4,9 +4,11 @@
   const config = window.SFS_CONFIG;
   const geometry = window.SFS_GEOMETRY;
   const metricsApi = window.SFS_METRICS;
+  const guidedCase = geometry.cases[geometry.guidedCaseId];
   const state = {
-    features: structuredClone(geometry.guidedCase),
-    assumptions: { ...config.initialAssumptions },
+    currentCaseId: geometry.guidedCaseId,
+    features: structuredClone(guidedCase.featureCollection),
+    assumptions: { ...guidedCase.assumptions },
     pendingRole: null,
     mode: "none"
   };
@@ -30,7 +32,7 @@
     return;
   }
 
-  const map = L.map("map", { zoomControl: false }).setView([geometry.center[1], geometry.center[0]], 17);
+  const map = L.map("map", { zoomControl: false }).setView([guidedCase.center[1], guidedCase.center[0]], guidedCase.zoom);
   L.control.zoom({ position: "bottomright" }).addTo(map);
 
   const featureGroup = L.featureGroup().addTo(map);
@@ -58,9 +60,42 @@
       style: featureStyle,
       onEachFeature(feature, layer) {
         layer.feature = feature;
+        if (feature.properties && feature.properties.name) {
+          layer.bindTooltip(feature.properties.name, { direction: "top", sticky: true });
+        }
         featureGroup.addLayer(layer);
       }
     });
+  }
+
+  function syncAssumptionControls() {
+    byId("setback").value = state.assumptions.setbackFeet;
+    byId("setbackValue").textContent = `${state.assumptions.setbackFeet} ft`;
+    byId("maxFar").value = state.assumptions.maxFar;
+    byId("maxFarValue").textContent = state.assumptions.maxFar.toFixed(1);
+    byId("coverage").value = state.assumptions.maxLotCoveragePercent;
+    byId("stories").value = state.assumptions.stories;
+  }
+
+  function loadPreparedCase(caseId, message) {
+    const preparedCase = geometry.cases[caseId];
+    if (!preparedCase) return;
+    disableAllModes();
+    state.currentCaseId = caseId;
+    state.features = structuredClone(preparedCase.featureCollection);
+    state.assumptions = { ...preparedCase.assumptions };
+    state.pendingRole = null;
+    byId("caseSelect").value = caseId;
+    byId("caseTitle").textContent = preparedCase.title;
+    byId("caseDescription").textContent = preparedCase.description;
+    byId("caseSourceNote").textContent = preparedCase.sourceNote;
+    syncAssumptionControls();
+    renderFeatures();
+    updateResults();
+    const bounds = featureGroup.getBounds();
+    if (bounds.isValid()) map.fitBounds(bounds, { padding: [36, 36], maxZoom: preparedCase.zoom, animate: true });
+    setActiveMode("none");
+    byId("toolInstruction").textContent = message;
   }
 
   function renderEnvelope(envelope) {
@@ -205,6 +240,10 @@
   byId("rotateShapes").addEventListener("click", () => activateMode("rotate"));
   byId("deleteShapes").addEventListener("click", () => activateMode("delete"));
   byId("finishEditing").addEventListener("click", () => activateMode("none"));
+  byId("loadCase").addEventListener("click", () => {
+    const caseId = byId("caseSelect").value;
+    loadPreparedCase(caseId, `${geometry.cases[caseId].title} loaded. All shapes remain editable.`);
+  });
 
   byId("setback").addEventListener("input", (event) => {
     state.assumptions.setbackFeet = Number(event.target.value);
@@ -228,21 +267,7 @@
   });
 
   byId("resetCase").addEventListener("click", () => {
-    disableAllModes();
-    state.features = structuredClone(geometry.guidedCase);
-    state.assumptions = { ...config.initialAssumptions };
-    state.pendingRole = null;
-    byId("setback").value = state.assumptions.setbackFeet;
-    byId("setbackValue").textContent = `${state.assumptions.setbackFeet} ft`;
-    byId("maxFar").value = state.assumptions.maxFar;
-    byId("maxFarValue").textContent = state.assumptions.maxFar.toFixed(1);
-    byId("coverage").value = state.assumptions.maxLotCoveragePercent;
-    byId("stories").value = state.assumptions.stories;
-    renderFeatures();
-    updateResults();
-    map.setView([geometry.center[1], geometry.center[0]], 17, { animate: true });
-    setActiveMode("none");
-    byId("toolInstruction").textContent = "Guided case restored.";
+    loadPreparedCase(geometry.guidedCaseId, "Pollak Library guided case restored.");
   });
 
   function installTooltips() {
@@ -282,6 +307,7 @@
     window.addEventListener("resize", () => { if (activeTrigger) place(activeTrigger); });
   }
 
+  syncAssumptionControls();
   renderFeatures();
   updateResults();
   installTooltips();

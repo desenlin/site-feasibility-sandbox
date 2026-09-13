@@ -9,12 +9,6 @@
       tileUrl: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution: "&copy; OpenStreetMap contributors",
       maxZoom: 19
-    },
-    initialAssumptions: {
-      setbackFeet: 20,
-      maxFar: 2,
-      maxLotCoveragePercent: 60,
-      stories: 3
     }
   });
 }());

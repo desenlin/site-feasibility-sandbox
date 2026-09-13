@@ -2,14 +2,14 @@ cff-version: 1.2.0
 message: "If you use this instructional software, please cite it using the metadata below."
 title: "Site Feasibility Sandbox"
 type: software
-version: 1.0.0
-date-released: 2026-08-31
+version: 1.1.0
+date-released: 2026-09-13
 authors:
   - family-names: Lin
     given-names: Desen
     affiliation: California State University, Fullerton
 repository-code: "https://github.com/desenlin/site-feasibility-sandbox"
-url: "https://desenlin.github.io/site-feasibility-sandbox/"
+url: "https://desenlin.com/site-feasibility-sandbox/"
 license: MIT
 keywords:
   - real estate education

@@ -28,18 +28,38 @@
         <div>
           <div class="brand-title">Site Feasibility Sandbox</div>
           <div class="brand-subtitle">Geometry literacy · Development capacity</div>
-          <div class="brand-byline">Created by Desen Lin, California State University, Fullerton</div>
+          <div class="brand-byline">Created by <a class="creator-link" href="https://desenlin.com/">Desen Lin</a>, California State University, Fullerton</div>
         </div>
       </div>
-      <div class="header-status" aria-live="polite"><span class="status-dot"></span><span id="mapStatus">Preparing workspace</span></div>
+      <div class="header-right">
+        <nav class="header-nav" aria-label="Primary navigation">
+          <a class="active" href="index.html" aria-current="page">Sandbox</a>
+          <a href="about.html">About</a>
+        </nav>
+        <div class="header-status" aria-live="polite"><span class="status-dot"></span><span id="mapStatus">Preparing workspace</span></div>
+      </div>
     </header>
 
     <div class="planner-workspace">
       <aside class="control-panel" aria-label="Site controls">
         <section class="panel-section">
           <p class="panel-kicker">Guided case</p>
-          <h1 class="panel-title">Fullerton Learning Site</h1>
-          <p class="panel-copy">A hypothetical 200 × 300 ft parcel near CSUF. Edit the geometry or replace it with your own boundary.</p>
+          <h1 class="panel-title" id="caseTitle">Pollak Library study area</h1>
+          <p class="panel-copy" id="caseDescription">The mapped Pollak Library footprint sits inside an instructional study boundary. Edit either shape and test how assumptions affect capacity.</p>
+          <p class="case-source" id="caseSourceNote">The building outline follows OpenStreetMap geometry. The surrounding study boundary is instructional, not a legal parcel.</p>
+        </section>
+
+        <section class="panel-section">
+          <p class="panel-kicker">Example cases</p>
+          <label class="select-label" for="caseSelect">Choose a prepared campus study</label>
+          <select id="caseSelect">
+            <option value="pollak">Pollak Library · guided case</option>
+            <option value="lot_c_east">South campus · compact lot</option>
+            <option value="lot_d">West campus · linear lot</option>
+            <option value="lot_g">North campus · multi-building</option>
+          </select>
+          <button class="tool-button primary wide case-load-button" id="loadCase" type="button">Load selected case</button>
+          <p class="tool-instruction">Each case is editable. Site labels and scenarios are illustrative; see <a href="about.html#case-method">case methods</a>.</p>
         </section>
 
         <section class="panel-section">
@@ -96,7 +116,7 @@
           <span class="key-item"><span class="key-swatch key-envelope"></span> Buildable</span>
           <span class="key-item"><span class="key-swatch key-building"></span> Building</span>
         </div>
-        <div class="map-watermark">Parcel location and assumptions are hypothetical and provided only for instruction. Measurements are preliminary, not survey-grade.</div>
+        <div class="map-watermark" id="mapDisclosure">Mapped features provide geographic context; study boundaries, buildings, and assumptions may be instructional. Measurements are preliminary, not survey-grade.</div>
         <noscript><div class="map-error">JavaScript is required to use this interactive planning tool.</div></noscript>
       </section>
 
@@ -125,7 +145,27 @@
       </aside>
     </div>
 
-    <footer class="planner-footer">Educational estimates only. This tool is not a survey, zoning determination, architectural plan, entitlement analysis, or investment recommendation. Created by Desen Lin for real estate instruction. <a href="https://github.com/desenlin/site-feasibility-sandbox">View source and documentation</a>.</footer>
+    <footer class="planner-footer">
+      <div class="footer-grid">
+        <section aria-label="Creator and affiliation">
+          <p class="footer-kicker">Created and maintained by</p>
+          <p class="footer-name"><a href="https://desenlin.com/">Desen Lin</a></p>
+          <p><a href="https://business.fullerton.edu/academics/finance">Department of Finance</a><br><a href="https://business.fullerton.edu/">College of Business and Economics</a><br><a href="https://www.fullerton.edu/">California State University, Fullerton</a></p>
+        </section>
+        <section aria-label="Educational disclaimer">
+          <p class="footer-kicker">Educational scope</p>
+          <p>This sandbox provides simplified, preliminary estimates for instruction. It is not a survey, zoning or entitlement determination, architectural or engineering plan, appraisal, investment recommendation, or other professional or consulting advice.</p>
+        </section>
+        <nav class="footer-links" aria-label="Project links">
+          <p class="footer-kicker">Project links</p>
+          <a href="about.html">About and methods</a>
+          <a href="https://desenlin.com/">Academic website</a>
+          <a href="mailto:desenlin@fullerton.edu">Email</a>
+          <a href="https://github.com/desenlin/site-feasibility-sandbox">Source and documentation</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">© 2026 Desen Lin. Institutional names are provided for affiliation only and do not imply endorsement.</div>
+    </footer>
   </main>
   <div id="conceptTooltip" class="concept-tooltip" role="tooltip" hidden></div>
 </body>

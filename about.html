@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Purpose, methods, data sources, and limitations of the Site Feasibility Sandbox.">
+  <meta name="author" content="Desen Lin">
+  <title>About · Site Feasibility Sandbox</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <main class="about-shell">
+    <header class="planner-header">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">SF</div>
+        <div>
+          <div class="brand-title">Site Feasibility Sandbox</div>
+          <div class="brand-subtitle">Geometry literacy · Development capacity</div>
+          <div class="brand-byline">Created by <a class="creator-link" href="https://desenlin.com/">Desen Lin</a>, California State University, Fullerton</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <nav class="header-nav" aria-label="Primary navigation">
+          <a href="index.html">Sandbox</a>
+          <a class="active" href="about.html" aria-current="page">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <article class="about-main">
+      <p class="about-eyebrow">About the project</p>
+      <h1 class="about-title">A transparent workspace for learning how site geometry shapes development capacity.</h1>
+      <p class="about-lead">The Site Feasibility Sandbox helps students move from an abstract site plan to measurable relationships among area, setbacks, building footprint, lot coverage, stories, gross floor area, and FAR. It is designed for instruction and exploratory reasoning—not for determining whether a real project can be built.</p>
+
+      <div class="about-actions">
+        <a class="about-button" href="index.html">Open the sandbox</a>
+        <a class="about-button secondary" href="https://github.com/desenlin/site-feasibility-sandbox">View source and documentation</a>
+      </div>
+
+      <div class="about-grid">
+        <section class="about-card">
+          <h2>Who should use it</h2>
+          <p>The tool is intended for real estate, urban economics, planning, and related courses in which learners need a quick, visual way to test development-capacity concepts.</p>
+          <p>No account, specialized GIS software, or prior coding experience is required. All edits and calculations occur in the browser.</p>
+        </section>
+
+        <section class="about-card">
+          <h2>How to use it</h2>
+          <ol>
+            <li>Begin with the Pollak Library guided case or load a prepared surface-lot example.</li>
+            <li>Edit the site or building shapes, or draw your own site and footprints.</li>
+            <li>Change the setback, FAR, coverage, and story assumptions.</li>
+            <li>Compare live results and identify which simplified constraint appears to bind.</li>
+            <li>Ask which omitted rules or real-world conditions could change the conclusion.</li>
+          </ol>
+        </section>
+
+        <section class="about-card wide" id="case-method">
+          <h2>Prepared cases and boundary method</h2>
+          <p>The Pollak Library case uses a mapped building outline inside an instructional study boundary. The three parking-lot cases use mapped surface-lot outlines with hypothetical building concepts. They provide recognizable geographic context while keeping the exercise editable.</p>
+          <p>Mapped outlines are adapted from <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. The <a href="https://www.fullerton.edu/campusmap/">official CSUF campus map</a> is the appropriate source for current campus orientation and parking information. Neither source supplies a legal parcel or survey boundary for this tool. Parking names, access rules, site conditions, and mapped features can change.</p>
+          <h3>Interpretation rule</h3>
+          <p>Every preset should be read as a teaching scenario. A mapped outline indicates geographic context; it does not establish ownership, development availability, regulatory status, or institutional plans. Preset building footprints and all development assumptions are hypothetical unless the interface explicitly identifies a feature as mapped existing.</p>
+        </section>
+
+        <section class="about-card">
+          <h2>What the calculations include</h2>
+          <ul>
+            <li>Site and buildable area after a uniform setback</li>
+            <li>Building footprint, lot coverage, and open site area</li>
+            <li>Gross floor area and floor area ratio</li>
+            <li>Capacity under selected FAR, coverage, and story assumptions</li>
+            <li>Warnings when footprints extend beyond the simplified buildable envelope</li>
+          </ul>
+        </section>
+
+        <section class="about-card">
+          <h2>What the model omits</h2>
+          <ul>
+            <li>Verified parcel, title, easement, and survey information</li>
+            <li>Applicable zoning, overlays, entitlement procedures, and legal review</li>
+            <li>Parking, access, fire, accessibility, infrastructure, and environmental requirements</li>
+            <li>Structural, architectural, engineering, and construction feasibility</li>
+            <li>Market demand, costs, financing, valuation, risk, and investment returns</li>
+          </ul>
+        </section>
+
+        <section class="about-card wide about-disclaimer">
+          <h2>Educational and professional-use disclaimer</h2>
+          <p>The Site Feasibility Sandbox provides simplified, preliminary estimates for classroom instruction and independent learning. It does not provide land-use, zoning, legal, engineering, architectural, environmental, appraisal, brokerage, investment, or other professional or consulting advice. Nothing produced by the tool establishes a property boundary, development right, entitlement pathway, project feasibility, market value, cost, or expected return.</p>
+          <p>Do not use the output to make acquisition, design, permitting, financing, construction, or investment decisions. A real project requires current source documents, verified measurements, applicable regulations, site-specific evidence, and review by appropriately qualified professionals and public agencies.</p>
+        </section>
+
+        <section class="about-card wide">
+          <h2>Creator, transparency, and reuse</h2>
+          <p>The tool was created and is maintained by <a href="https://desenlin.com/">Desen Lin</a> for real estate instruction at California State University, Fullerton. Its source code, calculation logic, licensing, citation guidance, and third-party attribution are publicly documented in the <a href="https://github.com/desenlin/site-feasibility-sandbox">project repository</a>.</p>
+          <p>The application has no account system or server-side database. Calculations run locally in the browser, and the project does not collect or transmit the site shapes or assumptions entered by users.</p>
+        </section>
+      </div>
+    </article>
+
+    <footer class="planner-footer">
+      <div class="footer-grid">
+        <section aria-label="Creator and affiliation">
+          <p class="footer-kicker">Created and maintained by</p>
+          <p class="footer-name"><a href="https://desenlin.com/">Desen Lin</a></p>
+          <p><a href="https://business.fullerton.edu/academics/finance">Department of Finance</a><br><a href="https://business.fullerton.edu/">College of Business and Economics</a><br><a href="https://www.fullerton.edu/">California State University, Fullerton</a></p>
+        </section>
+        <section aria-label="Educational disclaimer">
+          <p class="footer-kicker">Educational scope</p>
+          <p>This sandbox provides simplified, preliminary estimates for instruction. It is not a survey, zoning or entitlement determination, architectural or engineering plan, appraisal, investment recommendation, or other professional or consulting advice.</p>
+        </section>
+        <nav class="footer-links" aria-label="Project links">
+          <p class="footer-kicker">Project links</p>
+          <a href="about.html">About and methods</a>
+          <a href="https://desenlin.com/">Academic website</a>
+          <a href="mailto:desenlin@fullerton.edu">Email</a>
+          <a href="https://github.com/desenlin/site-feasibility-sandbox">Source and documentation</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">© 2026 Desen Lin. Institutional names are provided for affiliation only and do not imply endorsement.</div>
+    </footer>
+  </main>
+</body>
+</html>

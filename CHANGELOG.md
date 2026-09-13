@@ -2,6 +2,15 @@
 
 All notable project changes are documented here.
 
+## 1.1.0 — 2026-09-13
+
+- Replaced the abstract guided parcel with a Pollak Library case using its mapped building outline and a disclosed instructional study boundary.
+- Added three editable campus surface-lot cases with mapped site outlines and hypothetical building concepts.
+- Added case-specific descriptions, source notes, assumptions, map framing, and feature labels.
+- Added an About and methods page covering audience, workflow, case methodology, omissions, privacy, and professional-use limitations.
+- Expanded the footer with clearer attribution, affiliation links, project links, and a more visible educational disclaimer in the header color palette.
+- Linked each visible instance of the creator name to Desen Lin's academic website.
+
 ## 1.0.0 — 2026-08-31
 
 - Published the framework-free GitHub Pages edition.

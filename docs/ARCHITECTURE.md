@@ -8,9 +8,9 @@ The application is a static instructional tool. It intentionally avoids a framew
 
 ```mermaid
 flowchart TD
-  UI["index.html + styles.css"] --> APP["app.js interactions"]
+  UI["index/about.html + styles.css"] --> APP["app.js interactions"]
   CFG["config.js provider settings"] --> APP
-  GEO["geometry.js guided case"] --> APP
+  GEO["geometry.js prepared cases"] --> APP
   APP --> MET["metrics.js calculations"]
   APP --> MAP["Leaflet + Geoman"]
   MET --> TURF["Turf.js"]
@@ -42,9 +42,10 @@ Pinned third-party browser files are declared near the top of `index.html`. Chan
 2. drawing a site and a building;
 3. vertex editing, moving, rotating, and deleting;
 4. setback and capacity recalculation;
-5. reset behavior;
-6. keyboard and pointer access to definitions; and
-7. desktop and mobile layout.
+5. loading every prepared case and restoring the Pollak Library guided case;
+6. keyboard and pointer access to definitions;
+7. About-page and footer links; and
+8. desktop and mobile layout.
 
 ## Calculation boundary
 
@@ -59,6 +60,12 @@ The FAR capacity is:
 `site area × maximum FAR`
 
 The smaller of these is identified as the likely binding constraint. This is a teaching comparison, not a complete zoning analysis.
+
+## Prepared-case data
+
+`src/geometry.js` is the single source of truth for prepared case labels, map centers, assumptions, site and building polygons, and disclosure notes. The Pollak Library case pairs mapped building geometry with an explicitly instructional study boundary. The parking-lot cases pair mapped surface-lot outlines with hypothetical building concepts.
+
+Prepared cases must not be described as legal parcels, development opportunities, approved plans, or statements of university intent. If a mapped outline is revised, update the case note, `ATTRIBUTION.md`, the About page, and the version history together. Confirm that every hypothetical footprint remains inside the selected setback envelope.
 
 ## Deployment
 

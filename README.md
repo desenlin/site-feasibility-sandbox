@@ -9,7 +9,7 @@
 
 ## Purpose
 
-The Site Feasibility Sandbox helps real estate students connect a parcel's geometry with basic development-capacity measures. Students can draw or edit a hypothetical site and building footprints, change development assumptions, and see the resulting metrics update immediately.
+The Site Feasibility Sandbox helps real estate students connect a site's geometry with basic development-capacity measures. Students can begin with the mapped Pollak Library footprint or one of three prepared campus surface-lot studies, draw or edit site and building shapes, change development assumptions, and see the resulting metrics update immediately.
 
 The tool emphasizes conceptual learning rather than regulatory or architectural precision. It does not attempt to model solar access, local zoning overlays, parking standards, entitlement risk, construction feasibility, or investment returns.
 
@@ -21,16 +21,18 @@ The tool emphasizes conceptual learning rather than regulatory or architectural 
 - FAR capacity and unused capacity
 - The potentially binding relationship among FAR, lot coverage, setbacks, and stories
 - Geometry warnings when a footprint falls outside the simplified buildable envelope
+- Comparison of differently shaped prepared study sites
 
 Each key concept includes a short definition that appears by hovering over or focusing on its question-mark control.
 
 ## Using the sandbox
 
 1. Open the [published tool](https://desenlin.com/site-feasibility-sandbox/).
-2. Start with the guided Fullerton learning site or draw a replacement parcel.
+2. Start with the Pollak Library guided case, load a prepared surface-lot study, or draw a replacement site.
 3. Add, reshape, move, rotate, or delete building footprints.
 4. Change the setback, maximum FAR, maximum lot coverage, and story assumptions.
 5. Interpret the live capacity results and the likely binding constraint.
+6. Review the [About and methods](https://desenlin.com/site-feasibility-sandbox/about.html) page before interpreting a geographically referenced example.
 
 No account is required. Calculations run in the browser, and the application does not collect or transmit student inputs.
 
@@ -42,8 +44,9 @@ The code is separated by responsibility:
 
 | File | Responsibility |
 |---|---|
-| `src/config.js` | Basemap provider and initial assumptions |
-| `src/geometry.js` | Guided-case geometry |
+| `index.html` / `about.html` | Interactive workspace and project methods |
+| `src/config.js` | Basemap provider settings |
+| `src/geometry.js` | Guided and prepared-case geometry, labels, and assumptions |
 | `src/metrics.js` | Capacity calculations |
 | `src/app.js` | Map editing, controls, tooltips, and result rendering |
 | `assets/styles.css` | Layout and visual design |
@@ -56,13 +59,15 @@ GitHub Pages serves only static files. The repository contains no paid API crede
 
 ## Educational limitations
 
-Measurements are preliminary and not survey-grade. Results are not a zoning determination, architectural plan, entitlement analysis, appraisal, or investment recommendation. A real feasibility study requires verified parcel data, applicable regulations, easements, infrastructure, parking, access, environmental conditions, market evidence, and professional review.
+Measurements are preliminary and not survey-grade. Mapped outlines provide geographic context; they do not establish a legal parcel, ownership, development availability, or institutional plans. Prepared building concepts and development assumptions are hypothetical unless explicitly identified as mapped existing.
+
+Results are not a zoning or entitlement determination, architectural or engineering plan, appraisal, investment recommendation, or other professional or consulting advice. A real feasibility study requires verified parcel data, applicable regulations, easements, infrastructure, parking, access, environmental conditions, market evidence, and professional review.
 
 ## Citation
 
 GitHub's **Cite this repository** function is enabled through [`CITATION.cff`](CITATION.cff). A suggested citation is:
 
-> Lin, Desen. (2026). *Site Feasibility Sandbox* (Version 1.0.0) [Computer software]. https://github.com/desenlin/site-feasibility-sandbox
+> Lin, Desen. (2026). *Site Feasibility Sandbox* (Version 1.1.0) [Computer software]. https://github.com/desenlin/site-feasibility-sandbox
 
 ## Reuse and licensing
 
