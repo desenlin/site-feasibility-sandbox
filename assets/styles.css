@@ -22,10 +22,14 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .brand-lockup { display: flex; align-items: center; gap: 13px; min-width: 0; }
 .brand-mark { width: 42px; height: 42px; flex: 0 0 auto; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.55); border-radius: 8px; color: var(--orange); font-size: 18px; font-weight: 800; letter-spacing: -.05em; }
 .brand-title { font-size: 22px; line-height: 1.15; font-weight: 700; letter-spacing: .005em; }
+.brand-title-link { color: inherit; text-decoration: none; }
+.brand-title-link:hover { color: var(--orange); }
 .brand-subtitle { margin-top: 3px; color: #c9d6e7; font-size: 13px; }
 .brand-byline { margin-top: 4px; color: #b7c7da; font-size: 13px; line-height: 1.25; }
-.creator-link { color: white; font-weight: 800; text-decoration-color: var(--orange); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.creator-link { color: white; font-weight: 800; text-decoration: none; }
 .creator-link:hover { color: var(--orange); }
+.affiliation-link { color: white; text-decoration: none; }
+.affiliation-link:hover { color: var(--orange); }
 .header-right { display: flex; align-items: center; gap: 22px; }
 .header-nav { display: flex; align-items: center; gap: 5px; }
 .header-nav a { padding: 7px 9px; border-radius: 5px; color: #d7e0eb; font-size: 12px; font-weight: 750; text-decoration: none; }
