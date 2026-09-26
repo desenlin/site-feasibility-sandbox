@@ -1,0 +1,23 @@
+{
+  "site_url": "https://desenlin.com/site-feasibility-sandbox/",
+  "measurement_id": "G-MDGMSFPEH2",
+  "mode": "html",
+  "tracker": "assets/analytics.js",
+  "project": "site-feasibility-sandbox",
+  "exclude": {},
+  "smoke": [
+    {
+      "path": "",
+      "actions": [
+        {
+          "selector": "#loadCase",
+          "event": "case_load"
+        },
+        {
+          "selector": "#resetCase",
+          "event": "case_reset"
+        }
+      ]
+    }
+  ]
+}

@@ -19,6 +19,7 @@
   <script defer src="src/geometry.js"></script>
   <script defer src="src/metrics.js"></script>
   <script defer src="src/app.js"></script>
+<script defer src="assets/analytics.js" data-ga-id="G-MDGMSFPEH2" data-project="site-feasibility-sandbox"></script>
 </head>
 <body>
   <main class="planner-shell">
@@ -58,20 +59,20 @@
             <option value="lot_d">West campus · linear lot</option>
             <option value="lot_g">North campus · multi-building</option>
           </select>
-          <button class="tool-button primary wide case-load-button" id="loadCase" type="button">Load selected case</button>
+          <button class="tool-button primary wide case-load-button" id="loadCase" data-analytics-action="case_load" type="button">Load selected case</button>
           <p class="tool-instruction">Each case is editable. Site labels and scenarios are illustrative; see <a href="about.html#case-method">case methods</a>.</p>
         </section>
 
         <section class="panel-section">
           <p class="panel-kicker">Geometry tools</p>
           <div class="tool-grid">
-            <button class="tool-button primary wide" id="addBuilding" type="button">＋ Add building footprint</button>
-            <button class="tool-button wide" id="drawSite" type="button">◇ Draw a new site</button>
-            <button class="tool-button" id="editVertices" type="button">⌁ Vertices</button>
-            <button class="tool-button" id="moveShapes" type="button">✥ Move</button>
-            <button class="tool-button" id="rotateShapes" type="button">↻ Rotate</button>
-            <button class="tool-button" id="deleteShapes" type="button">⌫ Delete</button>
-            <button class="tool-button ghost wide active" id="finishEditing" type="button">⌁ Finish editing</button>
+            <button class="tool-button primary wide" id="addBuilding" data-analytics-action="building_draw" type="button">＋ Add building footprint</button>
+            <button class="tool-button wide" id="drawSite" data-analytics-action="site_draw" type="button">◇ Draw a new site</button>
+            <button class="tool-button" id="editVertices" data-analytics-action="geometry_edit" type="button">⌁ Vertices</button>
+            <button class="tool-button" id="moveShapes" data-analytics-action="geometry_move" type="button">✥ Move</button>
+            <button class="tool-button" id="rotateShapes" data-analytics-action="geometry_rotate" type="button">↻ Rotate</button>
+            <button class="tool-button" id="deleteShapes" data-analytics-action="geometry_delete" type="button">⌫ Delete</button>
+            <button class="tool-button ghost wide active" id="finishEditing" data-analytics-action="editing_finish" type="button">⌁ Finish editing</button>
           </div>
           <p class="tool-instruction" id="toolInstruction" aria-live="polite">Choose a tool, then work directly on the map.</p>
         </section>
@@ -83,29 +84,29 @@
               <div class="field-label"><label for="setback">Uniform setback</label><button class="help-trigger" type="button" data-definition="The minimum distance between the parcel boundary and the buildable envelope. This simplified model applies the same setback on every side." aria-label="Definition of uniform setback">?</button></div>
               <span class="field-value" id="setbackValue">20 ft</span>
             </div>
-            <input id="setback" type="range" min="0" max="60" step="1" value="20">
+            <input id="setback" data-analytics-action="assumption_change" data-analytics-once="true" data-analytics-value="setback" type="range" min="0" max="60" step="1" value="20">
           </div>
           <div class="field">
             <div class="field-line">
               <div class="field-label"><label for="maxFar">Maximum FAR</label><button class="help-trigger" type="button" data-definition="The selected upper limit on floor area ratio: total gross floor area divided by site area." aria-label="Definition of maximum FAR">?</button></div>
               <span class="field-value" id="maxFarValue">2.0</span>
             </div>
-            <input id="maxFar" type="range" min="0.2" max="6" step="0.1" value="2">
+            <input id="maxFar" data-analytics-action="assumption_change" data-analytics-once="true" data-analytics-value="maxFar" type="range" min="0.2" max="6" step="0.1" value="2">
           </div>
           <div class="field field-grid">
             <div>
               <div class="field-label"><label for="coverage">Max coverage</label><button class="help-trigger" type="button" data-definition="The greatest share of the site that may be occupied by building footprints at ground level." aria-label="Definition of maximum coverage">?</button></div>
-              <div class="unit-input"><input id="coverage" type="number" min="1" max="100" value="60"><span>%</span></div>
+              <div class="unit-input"><input id="coverage" data-analytics-action="assumption_change" data-analytics-once="true" data-analytics-value="coverage" type="number" min="1" max="100" value="60"><span>%</span></div>
             </div>
             <div>
               <div class="field-label"><label for="stories">Stories</label><button class="help-trigger" type="button" data-definition="The assumed number of floors. The tool estimates gross floor area as footprint area multiplied by stories." aria-label="Definition of stories">?</button></div>
-              <input id="stories" type="number" min="1" max="30" value="3">
+              <input id="stories" data-analytics-action="assumption_change" data-analytics-once="true" data-analytics-value="stories" type="number" min="1" max="30" value="3">
             </div>
           </div>
         </section>
 
         <section class="panel-section">
-          <button class="tool-button wide" id="resetCase" type="button">↶ Reset guided case</button>
+          <button class="tool-button wide" id="resetCase" data-analytics-action="case_reset" type="button">↶ Reset guided case</button>
         </section>
       </aside>
 
